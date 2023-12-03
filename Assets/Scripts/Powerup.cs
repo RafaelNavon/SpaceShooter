@@ -6,7 +6,8 @@ using UnityEngine;
 public class Powerup : MonoBehaviour
 {
     [SerializeField] private float speed = 3.0f;
-    [SerializeField] private GameObject tripleShotPrefab;
+    [SerializeField] private int powerupID;
+    //[SerializeField] private GameObject tripleShotPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +33,13 @@ public class Powerup : MonoBehaviour
             Player _player = other.transform.GetComponent<Player>();
             if (_player != null)
             {
-                _player.TripleShotActive();
+                switch (powerupID)
+                {
+                    case 0: _player.TripleShotActive(); break;
+                    case 1: _player.SpeedPowerupActive(); break;
+                    case 2: _player.ShieldActive(); break;
+                    default: return;
+                }
             }
             Destroy(this.gameObject);
             //Instantiate(tripleShotPrefab, transform.position, Quaternion.identity);

@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject enemyContainer;
-    [SerializeField] private GameObject powerUpPrefab;
+    [SerializeField] private GameObject[] powerUps;
 
     private bool stopSpawning = false;
     // Start is called before the first frame update
@@ -38,7 +38,8 @@ public class SpawnManager : MonoBehaviour
         while (stopSpawning == false)
         {
             Vector3 posToSpawnPowerup = new Vector3(Random.Range(-8f, 8f), 7, 0);
-            Instantiate(powerUpPrefab, posToSpawnPowerup, Quaternion.identity);
+            int randomPowerUp = Random.Range(0, 3);
+            Instantiate(powerUps[randomPowerUp], posToSpawnPowerup, Quaternion.identity);
             yield return new WaitForSeconds(Random.Range(3, 7));
         }
     }
